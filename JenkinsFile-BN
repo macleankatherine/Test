@@ -7,7 +7,7 @@ stages
       if (env.BUILD_NUMBER == '1')
       {
          currentBuild.result = 'ABORTED'
-         sh 'echo "Don't build the first time"'
+         sh 'echo "Dont build the first time"'
       }
     }
   }
