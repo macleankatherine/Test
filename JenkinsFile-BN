@@ -1,14 +1,17 @@
-pipeline
-{
-   agent any
-stages
-   {
-    stage('Build') {
-      if (env.BUILD_NUMBER == '1')
-      {
-         currentBuild.result = 'ABORTED'
-         sh 'echo "Dont build the first time"'
-      }
+pipeline {
+    agent any
+    stages {
+        stage('Build') {
+            steps {
+                script {
+                    if (env.BUILD_NUMBER == '1') {
+                        currentBuild.result = 'ABORTED'
+                        sh 'echo "Dont build the first time"'
+                    } else {
+                        sh 'echo "Build number: ${env.BUILD_NUMBER}. Build"'
+                    }
+                }
+            }
+        }
     }
-  }
-} 
+}
