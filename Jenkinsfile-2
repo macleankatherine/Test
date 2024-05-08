@@ -3,6 +3,14 @@ pipeline {
     stages {
         stage('Build')
         {
+            when
+            {
+                     expression
+                     {
+                        "${BRANCH_NAME}"  =~ /^(dev_|stable-)/
+                     }
+            }
+
             steps {
                   
                 sh 'echo "Hello World"'
