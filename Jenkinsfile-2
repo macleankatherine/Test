@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Slay') {
             steps {
-                sh 'echo "Hi ${BRANCH_NAME}"'
+                    echo "Current branch name: ${BRANCH_NAME}"
             }
         }
     }
