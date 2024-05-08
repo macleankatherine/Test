@@ -6,7 +6,6 @@ pipeline {
             when
                   {
                      environment name: 'OS', value: 'ubuntu20.04'
-                    sh 'echo "Hello when"'
                      expression 
                      {               
                         "${BRANCH_NAME}"  =~ /^(dev_|stable-)/
