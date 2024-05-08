@@ -3,6 +3,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                  when
+                  {
+                     environment name: 'OS', value: 'ubuntu20.04'
+                     expression 
+                     {               
+                        "${BRANCH_NAME}"  =~ /^(dev_|stable-)/
+                     }   
+                   }
                 sh 'echo "Hello World"'
                 sh '''
                     echo "Multiline shell steps works too"
