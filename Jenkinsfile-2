@@ -1,9 +1,9 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
-            steps {
-                  when
+        stage('Build')
+        {
+            when
                   {
                      environment name: 'OS', value: 'ubuntu20.04'
                      expression 
@@ -11,6 +11,9 @@ pipeline {
                         "${BRANCH_NAME}"  =~ /^(dev_|stable-)/
                      }   
                    }
+
+            steps {
+                  
                 sh 'echo "Hello World"'
                 sh '''
                     echo "Multiline shell steps works too"
