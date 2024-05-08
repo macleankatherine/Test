@@ -8,7 +8,7 @@ pipeline {
                      environment name: 'OS', value: 'ubuntu20.04'
                      expression 
                      {               
-                        "${BRANCH_NAME}"  =~ /^(dev_|stable-)/
+                        "${BRANCH_NAME}"  =~ 'dev_*|stable-*'
                      }   
                    }
 
