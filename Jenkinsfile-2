@@ -4,12 +4,12 @@ pipeline {
         stage('Build')
         {
             when
-            {
-                     expression
-                     {
-                        "${BRANCH_NAME}"  =~ /^(dev_|stable-)/
-                     }
-            }
+                  {
+                     expression 
+                     {               
+                        "${BRANCH_NAME}"  =~ 'dev_*|stable-*'
+                     }   
+                   }
 
             steps {
                   
@@ -18,6 +18,14 @@ pipeline {
                     echo "Multiline shell steps works too"
                     ls -lah
                 '''
+            }
+        }
+        stage('Slay')
+        {
+
+            steps {
+                  
+                sh 'echo "Hi ${BRANCH_NAME}"'
             }
         }
     }
