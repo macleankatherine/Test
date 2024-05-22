@@ -12,11 +12,15 @@ pipeline {
         }
         
         stage('deploy') {
-           if (result.equals("SUCCESS")) {
-              build 'deploy'
-           } else {
-              echo "Cannot deploy without successful build" // it is important to have a deploy stage even here for the current visualization
-           }
+            steps {
+                script {
+                    if (RESULT == 'SUCCESS') {
+                        build job: 'deploy'
+                    } else {
+                        echo "Cannot deploy without successful build"
+                    }
+                }
+            }
         }
     }
 }
