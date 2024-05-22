@@ -1,17 +1,22 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
-            steps {
-                script {
-                    if (env.BUILD_NUMBER == '1') {
-                        currentBuild.result = 'ABORTED'
-                        sh 'echo "Don\'t build the first time"'
-                    } else {
-                        sh "echo 'Build number: ${env.BUILD_NUMBER}. Build'"
-                    }
-                }
-            }
+        try {
+           stage('end-to-end-tests') {
+             node {      
+               echo "HEllo"
+             }
+           }
+        } catch (e) {
+           result = "FAIL" // make sure other exceptions are recorded as failure too
+        }
+        
+        stage('deploy') {
+           if (result.equals("SUCCESS")) {
+              build 'deploy'
+           } else {
+              echo "Cannot deploy without successful build" // it is important to have a deploy stage even here for the current visualization
+           }
         }
     }
 }
