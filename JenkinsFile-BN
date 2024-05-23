@@ -1,24 +1,10 @@
 pipeline {
     agent any
     stages {
-        try {
-           stage('end-to-end-tests') {
-             node {      
-               echo "HEllo"
-             }
-           }
-        } catch (e) {
-           result = "FAIL" // make sure other exceptions are recorded as failure too
-        }
-        
         stage('deploy') {
             steps {
                 script {
-                    if (RESULT == 'SUCCESS') {
-                        build job: 'deploy'
-                    } else {
-                        echo "Cannot deploy without successful build"
-                    }
+                    echo "Cannot deploy without successful build: ${JENKINS_HOME}"
                 }
             }
         }
